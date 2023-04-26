@@ -16,9 +16,11 @@ export default function (
 
   if (error instanceof ZodError) {
     return res.status(400).json({
-      message: error.issues[0].message,
+      message: error.issues.map(({ message }) => message),
     });
   }
+
+  
 
   return res
     .status(500)
