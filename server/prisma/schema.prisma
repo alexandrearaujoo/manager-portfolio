@@ -6,3 +6,51 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String     @unique
+  hashedPassword String?
+  emailVerified  DateTime?
+  image          String?
+  createdAt      DateTime   @default(now())
+  account        Account[]
+  projects       Projects[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Projects {
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  type           String?
+  slug           String?
+  thumbnail      String?
+  linkWebsite    String  @map("link_website")
+  linkRepository String  @map("link_repository")
+  description    String?
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String  @db.ObjectId
+
+  @@map("projects")
+}
