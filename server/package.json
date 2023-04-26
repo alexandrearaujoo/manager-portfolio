@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "vercel-build": "npx tsc",
     "dev": "tsx watch src/server.ts",
-    "start": ""
+    "start": "node src/server.js"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
