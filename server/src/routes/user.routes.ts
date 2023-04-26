@@ -1,4 +1,5 @@
 import UserController from "@/controllers/user.controller";
+import { Auth } from "@/middlewares/auth";
 import { validate } from "@/middlewares/schemaValidator";
 import { loginSchema, userSchema } from "@/schemas/userSchema";
 import { Router } from "express";
@@ -18,6 +19,8 @@ export const userRouter = () => {
     validate(loginSchema),
     userController.login.bind(userController)
   );
+
+  router.get("/users", Auth, userController.show.bind(userController));
 
   return router;
 };

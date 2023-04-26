@@ -17,6 +17,9 @@ class UserService implements UserServiceInterface {
   }) {
     return await this.userRepository.createUserSession({ email, password });
   }
+  async getUserById(id: string) {
+    return await this.userRepository.getUserById(id);
+  }
 }
 
 export default UserService;

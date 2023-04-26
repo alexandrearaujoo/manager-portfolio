@@ -58,7 +58,13 @@ class UserModel implements ModelInterface {
   }
 
   async getUserById(id: string) {
-    return await prisma.user.findUnique({ where: { id } });
+    const user = await prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new AppError(404, "User not found");
+    }
+
+    return user;
   }
 }
 

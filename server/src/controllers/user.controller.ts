@@ -15,13 +15,21 @@ class UserController implements UserControllerInterface {
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    
+
     const { token } = await this.userService.createUserSession({
       email,
       password,
     });
-    
+
     return res.status(200).json({ message: "User logged successfully", token });
+  }
+  
+  async show(req: Request, res: Response) {
+    const { id } = req.user;
+
+    const user = await this.userService.getUserById(id);
+
+    return res.status(200).json(user);
   }
 }
 
