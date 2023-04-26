@@ -1,8 +1,9 @@
 import "express-async-errors";
 import express, { Express } from "express";
 import cors from "cors";
-import errorHandler from "./middlewares/errorHandler";
-import { appRoutes } from "./routes";
+
+import { appRoutes } from "@/routes";
+import errorHandler from "@/middlewares/errorHandler";
 
 class App {
   server: Express;
