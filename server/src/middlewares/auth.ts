@@ -6,7 +6,10 @@ export const Auth = (req: Request, _: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError(401, "Token not provided");
+    throw new AppError(
+      401,
+      "Token not provided. Please make sure you are logged in"
+    );
   }
 
   try {
