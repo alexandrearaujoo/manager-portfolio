@@ -7,6 +7,16 @@ class UserService implements UserServiceInterface {
   async createUser(data: UserRequest) {
     return await this.userRepository.createUser(data);
   }
+
+  async createUserSession({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
+    return await this.userRepository.createUserSession({ email, password });
+  }
 }
 
 export default UserService;
