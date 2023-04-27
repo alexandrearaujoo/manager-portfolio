@@ -9,7 +9,6 @@ const router = Router();
 const userController = new UserController();
 
 export const userRouter = () => {
-  router.get("/users/test", (req, res) => res.send("funcionou"));
   router.post(
     "/users",
     validate(userSchema),
