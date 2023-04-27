@@ -1,8 +1,7 @@
-import AppError from "@/errors";
 import {
   ProjectRequest,
   ProjectModelInterface,
-} from "@/interfaces/projects.interface";
+} from "../interfaces/projects.interface";
 import { prisma } from "prisma/prismaClient";
 
 class ProjectModel implements ProjectModelInterface {

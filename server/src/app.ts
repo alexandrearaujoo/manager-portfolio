@@ -3,7 +3,7 @@ import express, { Express } from "express";
 import cors from "cors";
 
 import { appRoutes } from "./routes";
-import errorHandler from "@/middlewares/errorHandler";
+import errorHandler from "./middlewares/errorHandler";
 
 class App {
   server: Express;

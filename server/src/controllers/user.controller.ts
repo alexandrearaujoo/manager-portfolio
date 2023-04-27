@@ -1,5 +1,5 @@
-import { UserControllerInterface } from "@/interfaces/user.interface";
-import UserService from "@/services/user.service";
+import { UserControllerInterface } from "../interfaces/user.interface";
+import UserService from "../services/user.service";
 import { Request, Response } from "express";
 
 class UserController implements UserControllerInterface {

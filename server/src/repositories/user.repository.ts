@@ -1,8 +1,8 @@
 import {
   UserRepositoryInterface,
   UserRequest,
-} from "@/interfaces/user.interface";
-import UserModel from "@/models/userModel";
+} from "../interfaces/user.interface";
+import UserModel from "../models/userModel";
 
 class UserRepository implements UserRepositoryInterface {
   constructor(private userModel = new UserModel()) {}

@@ -1,7 +1,7 @@
-import ProjectController from "@/controllers/project.controller";
-import { Auth } from "@/middlewares/auth";
-import { validate } from "@/middlewares/schemaValidator";
-import { projectSchema } from "@/schemas/projectSchema";
+import ProjectController from "../controllers/project.controller";
+import { Auth } from "../middlewares/auth";
+import { validate } from "../middlewares/schemaValidator";
+import { projectSchema } from "../schemas/projectSchema";
 import { Router } from "express";
 
 const router = Router();

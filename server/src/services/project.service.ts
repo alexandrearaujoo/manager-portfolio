@@ -1,8 +1,8 @@
 import {
   ProjectRequest,
   ProjectServiceInterface,
-} from "@/interfaces/projects.interface";
-import ProjectRepository from "@/repositories/project.repository";
+} from "../interfaces/projects.interface";
+import ProjectRepository from "../repositories/project.repository";
 
 class ProjectService implements ProjectServiceInterface {
   constructor(private projectRepository = new ProjectRepository()) {}

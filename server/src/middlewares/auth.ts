@@ -1,4 +1,4 @@
-import AppError from "@/errors";
+import AppError from "../errors";
 import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 

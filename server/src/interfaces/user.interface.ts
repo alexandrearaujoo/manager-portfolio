@@ -52,8 +52,4 @@ export interface UserControllerInterface {
     req: Request,
     res: Response
   ): Promise<Response<any, Record<string, any>>>;
-  // findOne(email: string): Promise<User>;
-  // findById(id: string): Promise<User>;
-  // delete(id: string): Promise<void>;
-  // update(id: string, user: User): Promise<User>;
 }

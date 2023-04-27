@@ -1,5 +1,5 @@
-import { ProjectControllerInterface } from "@/interfaces/projects.interface";
-import ProjectService from "@/services/project.service";
+import { ProjectControllerInterface } from "../interfaces/projects.interface";
+import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
 
 class ProjectController implements ProjectControllerInterface {

@@ -1,7 +1,7 @@
-import UserController from "@/controllers/user.controller";
-import { Auth } from "@/middlewares/auth";
-import { validate } from "@/middlewares/schemaValidator";
-import { loginSchema, userSchema } from "@/schemas/userSchema";
+import UserController from "../controllers/user.controller";
+import { Auth } from "../middlewares/auth";
+import { validate } from "../middlewares/schemaValidator";
+import { loginSchema, userSchema } from "../schemas/userSchema";
 import { Router } from "express";
 
 const router = Router();
@@ -9,6 +9,7 @@ const router = Router();
 const userController = new UserController();
 
 export const userRouter = () => {
+  router.get("/users/test", (req, res) => res.send("funcionou"));
   router.post(
     "/users",
     validate(userSchema),
