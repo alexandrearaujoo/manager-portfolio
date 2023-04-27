@@ -1,7 +1,7 @@
 import AppError from "../errors";
 
 import { UserRequest, ModelInterface } from "../interfaces/user.interface";
-import { prisma } from "prisma/prismaClient";
+import { prisma } from "../../prisma/prismaClient";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

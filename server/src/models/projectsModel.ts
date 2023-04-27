@@ -2,7 +2,7 @@ import {
   ProjectRequest,
   ProjectModelInterface,
 } from "../interfaces/projects.interface";
-import { prisma } from "prisma/prismaClient";
+import { prisma } from "../../prisma/prismaClient";
 
 class ProjectModel implements ProjectModelInterface {
   async createProject(data: ProjectRequest) {
