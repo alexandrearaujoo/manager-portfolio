@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "postinstall": "cd .. && husky install client/.husky"
   },
   "dependencies": {
     "@types/node": "18.15.10",
