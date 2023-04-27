@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "vercel-build": "npx prisma generate",
     "dev": "tsx watch src/server.ts",
     "start": ""
   },
