@@ -17,7 +17,7 @@ export interface ModelInterface {
   }: {
     email: string;
     password: string;
-  }): Promise<{ message: string; token: string }>;
+  }): Promise<User>;
 }
 
 export interface UserServiceInterface {
@@ -28,7 +28,7 @@ export interface UserServiceInterface {
   }: {
     email: string;
     password: string;
-  }): Promise<{ message: string; token: string }>;
+  }): Promise<User>;
 }
 
 export interface UserRepositoryInterface {
@@ -40,7 +40,7 @@ export interface UserRepositoryInterface {
   }: {
     email: string;
     password: string;
-  }): Promise<{ message: string; token: string }>;
+  }): Promise<User>;
 }
 
 export interface UserControllerInterface {

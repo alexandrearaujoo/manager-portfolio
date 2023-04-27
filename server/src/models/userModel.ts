@@ -48,10 +48,7 @@ class UserModel implements ModelInterface {
       }
     );
 
-    return {
-      message: "Login successful",
-      token,
-    };
+    return { ...user, token };
   }
   async getUserByEmail(email: string) {
     return await prisma.user.findUnique({ where: { email } });
