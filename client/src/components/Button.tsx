@@ -5,11 +5,11 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
-  className?: string;
+  onClick?: () => void;
   path?: string;
 }
 
-const Button = ({ children, className, path, ...rest }: ButtonProps) => {
+const Button = ({ children, path, onClick, ...rest }: ButtonProps) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -20,13 +20,11 @@ const Button = ({ children, className, path, ...rest }: ButtonProps) => {
 
   return (
     <button
-      className={`${className} text-black text-decoration-none outline-none border-none bg-transparent`}
       {...rest}
-      onClick={handleClick}
+      onClick={path ? handleClick : onClick}
+      className="text-lg flex items-center justify-center gap-4 text-white font-inherit font-bold relative border-none bg-none ease-expend duration-[400ms] transition-color focus:after:w-full focus:after:left-[0%] hover:after:w-full hover:after:left-[0%] after:content-[''] after:pointer-events-none after:-bottom-[2px] after:left-1/2 after:absolute after:w-[0%] after:h-[2px] after:bg-white after:ease-expend after:duration-[400ms] after:transition-expend"
     >
-      <span className="tracking-wider text-md w-[140px] h-auto float-left duration-[0.5s] ease-linear relative block overflow-hidden p-[10px] text-center mx-[5px] bg-transparent uppercase font-bold text-white before:absolute before:content-[''] before:left-0 before:top-0 before:h-[4px] before:w-full before:border-b-[4px] before:border-b-transparent before:border-l-[4px] before:border-l-transparent before:box-border before:translate-x-full after:absolute after:content-[''] after:left-0 after:bottom-0 after:h-[4px] after:w-full after:border-t-[4px] after:border-b-transparent after:border-r-[4px] after:border-l-transparent after:box-border after:-translate-x-full hover:shadow-[0_5px_15px_rgba(0,0,0,0.5)] hover:before:border-white hover:before:h-full hover:before:translate-x-0 hover:before:duration-[0.3s] hover:after:border-white hover:after:h-full hover:after:translate-x-0 hover:after:duration-[0.3s]">
-        {children}
-      </span>
+      {children}
     </button>
   );
 };
