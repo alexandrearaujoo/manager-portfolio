@@ -8,14 +8,32 @@ import { FcGoogle } from 'react-icons/fc';
 import Button from '../Button';
 import Input from '../Input';
 
+import { useRegisterForm } from '@/hooks/useRegisterForm';
+
 const RegisterForm = () => {
+  const { errors, handleSubmit, isSubmitting, onSubmit, register } =
+    useRegisterForm();
   return (
-    <form className="space-y-6 flex flex-col justify-around items-center w-[95%] max-w-[450px] py-3 rounded-lg shadow-[2px_3px_9px_0px_rgba(0,0,0,0)] backdrop-blur-sm bg-white/10">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6 flex flex-col justify-around items-center w-[95%] max-w-[450px] py-3 rounded-lg shadow-[2px_3px_9px_0px_rgba(0,0,0,0)] backdrop-blur-sm bg-white/10"
+    >
       <h2 className="text-white font-bold tracking-[3px]">Register</h2>
-      <Input label="Email" />
-      <Input label="Name" />
-      <Input label="Password" icon />
-      <Button type="submit">Register</Button>
+      <Input
+        label="Email"
+        {...register('email')}
+        error={errors.email?.message}
+      />
+      <Input label="Name" {...register('name')} error={errors.name?.message} />
+      <Input
+        label="Password"
+        icon
+        {...register('password')}
+        error={errors.password?.message}
+      />
+      <Button type="submit" disabled={isSubmitting}>
+        Register
+      </Button>
       <Button onClick={() => signIn('google')} type="button">
         Continue with Google <FcGoogle size={24} />
       </Button>

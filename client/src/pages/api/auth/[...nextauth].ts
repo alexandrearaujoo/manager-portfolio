@@ -24,11 +24,11 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }
 
-        const user = await fetchWrapper<User>('/users/login', {
+        const user = await fetchWrapper<User>('users/login', {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -39,17 +39,25 @@ export const authOptions: AuthOptions = {
           })
         });
 
+        if ('message' in user) {
+          throw new Error(user.message as string);
+        }
+
         return user;
       }
     })
   ],
   pages: {
-    signIn: '/'
+    signIn: '/login',
+    error: '/login'
+  },
+  callbacks: {
+    async session({ session, token }) {
+      return { ...session, token: token.token as string };
+    }
   },
   debug: process.env.NODE_ENV === 'development',
-  session: {
-    strategy: 'jwt'
-  },
+
   secret: process.env.NEXTAUTH_SECRET
 };
 

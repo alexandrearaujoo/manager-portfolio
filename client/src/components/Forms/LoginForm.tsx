@@ -5,13 +5,32 @@ import Link from 'next/link';
 import Button from '../Button';
 import Input from '../Input';
 
+import { useLoginForm } from '@/hooks/useLoginForm';
+
 const LoginForm = () => {
+  const { errors, handleSubmit, isSubmitting, onSubmit, register } =
+    useLoginForm();
+
   return (
-    <form className="flex flex-col justify-around items-center w-[95%] max-w-[400px] h-[350px] rounded-lg shadow-[2px_3px_9px_0px_rgba(0,0,0,0)] backdrop-blur-sm bg-white/10">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col justify-around items-center w-[95%] max-w-[400px] h-[350px] rounded-lg shadow-[2px_3px_9px_0px_rgba(0,0,0,0)] backdrop-blur-sm bg-white/10"
+    >
       <h2 className="text-white font-bold tracking-[3px]">Login</h2>
-      <Input label="Email" />
-      <Input label="Password" icon />
-      <Button type="submit">Login</Button>
+      <Input
+        label="Email"
+        {...register('email')}
+        error={errors.email?.message}
+      />
+      <Input
+        label="Password"
+        icon
+        {...register('password')}
+        error={errors.password?.message}
+      />
+      <Button type="submit" disabled={isSubmitting}>
+        Login
+      </Button>
       <p className="text-white">
         Não possui conta ainda ?{' '}
         <Link

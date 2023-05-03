@@ -7,12 +7,11 @@ import {
   useState
 } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { FieldErrors } from 'react-hook-form';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   icon?: boolean;
-  error?: any;
+  error?: string;
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
@@ -40,7 +39,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           htmlFor={label}
           className="absolute text-md text-white duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
         >
-          {label}
+          {label} {error && <span className="text-red-500"> - {error}</span>}
         </label>
         <button
           className="absolute right-[5px] bottom-[5px] border-none bg-transparent"
@@ -66,7 +65,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         htmlFor={label}
         className="absolute text-md text-white duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
       >
-        {label}
+        {label} {error && <span className="text-red-500"> - {error}</span>}
       </label>
     </div>
   );
