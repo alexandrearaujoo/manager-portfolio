@@ -17,6 +17,45 @@ module.exports = {
       transitionProperty: {
         expend: 'width, left',
         color: 'color'
+      },
+      animation: {
+        'slide-right':
+          'slide-right 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'slide-left':
+          'slide-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'fade-in': 'fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'
+      },
+      keyframes: {
+        'slide-right': {
+          '0%': {
+            transform: 'translateX(-520px)',
+            opacity: '0'
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: '1'
+          }
+        },
+        'slide-left': {
+          '0%': {
+            transform: 'translateX(520px)',
+            opacity: '0'
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: '1'
+          }
+        },
+        'fade-in': {
+          '0%': {
+            transform: 'scale(0.5)',
+            opacity: '0'
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: '1'
+          }
+        }
       }
     }
   },
