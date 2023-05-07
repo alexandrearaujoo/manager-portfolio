@@ -4,7 +4,7 @@ export const projectSchema = z.object({
   title: z.string({ required_error: "Title is required" }),
   type: z.string().nullish(),
   slug: z.string().nullish(),
-  thumbbail: z.string().nullish(),
+  thumbnail: z.string().nullish(),
   linkWebsite: z
     .string({ required_error: "Link of website is required" })
     .url("Link of website is invalid"),
