@@ -22,13 +22,14 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
   const handleClick = () => setShowPassword(!showPassword);
 
-  const Icon = showPassword ? AiOutlineEyeInvisible : AiOutlineEye;
+  const Icon = showPassword ? AiOutlineEye : AiOutlineEyeInvisible;
 
   return (
     <div className="relative w-full">
       <input
         id={label}
         ref={ref}
+        type={showPassword && icon ? 'password' : 'text'}
         {...rest}
         className={`block px-3 pt-6 pb-1 w-full text-md text-black bg-transparent border-2 ${
           error ? 'border-red-500' : 'border-blue-600'

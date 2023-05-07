@@ -28,7 +28,7 @@ const RegisterForm = () => {
     <section className="flex items-center flex-row-reverse gap-x-20 transition">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="animate-fade-in md:animate-slide-left bg-white h-screen w-full min-w-[309px] md:w-2/5 flex flex-col items-center justify-center gap-8 transition"
+        className="px-10 animate-fade-in md:animate-slide-left bg-white h-screen w-full min-w-[309px] md:w-2/5 flex flex-col items-center justify-center gap-8 transition"
       >
         <h2 className="text-black font-bold text-center text-3xl">Sign Up</h2>
         <Input
@@ -50,10 +50,20 @@ const RegisterForm = () => {
         <Button type="submit" disabled={isSubmitting}>
           Register
         </Button>
-        <Button onClick={() => signIn('google')} type="button">
+        <Button
+          onClick={() => signIn('google')}
+          type="button"
+          disabled
+          title="Coming soon..."
+        >
           <FcGoogle size={24} /> Continue with Google
         </Button>
-        <Button onClick={() => signIn('github')} type="button">
+        <Button
+          onClick={() => signIn('github')}
+          type="button"
+          disabled
+          title="Coming soon..."
+        >
           <AiFillGithub size={24} /> Continue with GitHub
         </Button>
         <p className="text-black text-center font-semibold">

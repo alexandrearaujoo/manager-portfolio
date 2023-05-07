@@ -8,6 +8,9 @@ import Input from '../Input';
 
 import { useLoginForm } from '@/hooks/useLoginForm';
 import LoginAnimation from '@/lotties/121421-login.json';
+import { FcGoogle } from 'react-icons/fc';
+import { AiFillGithub } from 'react-icons/ai';
+import { signIn } from 'next-auth/react';
 
 const defaultOptions = {
   loop: true,
@@ -26,7 +29,7 @@ const LoginForm = () => {
     <section className="flex items-center gap-x-20 transition">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="animate-fade-in md:animate-slide-right bg-white h-screen w-full min-w-[309px] md:w-2/5 flex flex-col items-center justify-center gap-9 transition"
+        className="px-10 animate-fade-in md:animate-slide-right bg-white h-screen w-full min-w-[309px] md:w-2/5 flex flex-col items-center justify-center gap-9 transition"
       >
         <h2 className="text-black font-bold text-center text-3xl">Login</h2>
         <Input
@@ -52,6 +55,22 @@ const LoginForm = () => {
             Sign Up
           </Link>
         </p>
+        <Button
+          onClick={() => signIn('google')}
+          type="button"
+          disabled
+          title="Coming soon..."
+        >
+          <FcGoogle size={24} /> Login with Google
+        </Button>
+        <Button
+          onClick={() => signIn('github')}
+          type="button"
+          disabled
+          title="Coming soon..."
+        >
+          <AiFillGithub size={24} /> Login with GitHub
+        </Button>
       </form>
       <div className="hidden md:block">
         <Lottie
