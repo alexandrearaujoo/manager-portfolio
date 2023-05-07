@@ -29,14 +29,17 @@ export const useCreateProject = () => {
   };
 
   const onSubmit = async (data: ProjectRequest) => {
-    const project = await fetchWrapper<{ message: string }>('projects', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_JWT_TOKEN}`
-      },
-      method: 'POST',
-      body: JSON.stringify({ ...data })
-    });
+    const project = await fetchWrapper<{ message: string; status: number }>(
+      'projects',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_JWT_TOKEN}`
+        },
+        method: 'POST',
+        body: JSON.stringify({ ...data })
+      }
+    );
     if (project.status !== 201) {
       toast.error(project.message);
       return;
