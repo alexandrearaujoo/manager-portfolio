@@ -9,6 +9,18 @@ export interface User {
   token: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  type: string | null;
+  slug: string | null;
+  thumbnail: string | null;
+  linkWebsite: string;
+  linkRepository: string;
+  description: string | null;
+  userId: string;
+}
+
 export interface Session {
   name: string;
   email: string;
@@ -25,6 +37,10 @@ export interface ModalStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+}
+
+export interface ProjectStore {
+  getUserProjects: () => Promise<Project[] | undefined>;
 }
 
 interface InfoProps {

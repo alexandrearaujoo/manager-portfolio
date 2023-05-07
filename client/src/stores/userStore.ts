@@ -10,6 +10,8 @@ export const userStore = create<UserStore>((set, get) => ({
   getCurrentUser: async () => {
     const session: Session | null = await get().getSession();
 
+    console.log(session);
+
     if (!session) {
       return;
     }

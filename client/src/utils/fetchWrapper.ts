@@ -9,5 +9,9 @@ export const fetchWrapper = async <T = unknown>(
 
   const result = (await data.json()) as T;
 
+  if (Array.isArray(result)) {
+    return result;
+  }
+
   return { ...result, status: data.status };
 };
