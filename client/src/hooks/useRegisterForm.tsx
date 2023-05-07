@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
@@ -7,6 +8,8 @@ import { fetchWrapper } from '@/utils/fetchWrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useRegisterForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -33,12 +36,13 @@ export const useRegisterForm = () => {
     const res = await signIn('credentials', {
       email: data.email,
       password: data.password,
-      callbackUrl: '/dashboard'
+      redirect: false
     });
 
     if (res?.ok) {
       reset();
       toast.success('Login successful');
+      router.push('/dashboard');
     }
     if (res?.error) {
       toast.error(res.error);

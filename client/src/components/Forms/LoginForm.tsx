@@ -1,6 +1,9 @@
 'use client';
 
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { AiFillGithub } from 'react-icons/ai';
+import { FcGoogle } from 'react-icons/fc';
 import Lottie from 'react-lottie';
 
 import Button from '../Button';
@@ -8,9 +11,6 @@ import Input from '../Input';
 
 import { useLoginForm } from '@/hooks/useLoginForm';
 import LoginAnimation from '@/lotties/121421-login.json';
-import { FcGoogle } from 'react-icons/fc';
-import { AiFillGithub } from 'react-icons/ai';
-import { signIn } from 'next-auth/react';
 
 const defaultOptions = {
   loop: true,
