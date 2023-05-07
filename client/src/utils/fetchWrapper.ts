@@ -7,7 +7,7 @@ export const fetchWrapper = async <T = unknown>(
     init
   );
 
-  const result = await data.json();
+  const result = (await data.json()) as T;
 
-  return { ...result, status: data.status } as T;
+  return { ...result, status: data.status };
 };

@@ -25,7 +25,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   const Icon = showPassword ? AiOutlineEyeInvisible : AiOutlineEye;
 
   return (
-    <div className="relative w-[95%] transistion">
+    <div className="relative w-full">
       <input
         id={label}
         ref={ref}

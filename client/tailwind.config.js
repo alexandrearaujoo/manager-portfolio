@@ -23,7 +23,8 @@ module.exports = {
           'slide-right 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
         'slide-left':
           'slide-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        'fade-in': 'fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'
+        'fade-in': 'fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both',
+        'skeleton-body': 'shimmer 5s infinite linear'
       },
       keyframes: {
         'slide-right': {
@@ -55,7 +56,18 @@ module.exports = {
             transform: 'scale(1)',
             opacity: '1'
           }
+        },
+        shimmer: {
+          '0%': {
+            mask: 'linear-gradient(-60deg,#000 30%,#0009,#000 70%) right/600% 100%'
+          },
+          '100%': {
+            mask: 'linear-gradient(-60deg,#000 30%,#0009,#000 70%) left/600% 100%'
+          }
         }
+      },
+      gridTemplateColumns: {
+        'auto-fit': 'repeat(auto-fit, minmax(12rem, 1fr))'
       }
     }
   },
