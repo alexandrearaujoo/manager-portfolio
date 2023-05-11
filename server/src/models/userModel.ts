@@ -44,7 +44,6 @@ class UserModel implements ModelInterface {
       process.env.JWT_SECRET as string,
       {
         subject: user.id,
-        expiresIn: "1d",
       }
     );
 
