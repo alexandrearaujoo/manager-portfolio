@@ -20,5 +20,17 @@ export const projectRouter = () => {
     projectController.index.bind(projectController)
   );
 
+  router.patch(
+    "/projects/:id",
+    Auth,
+    projectController.update.bind(projectController)
+  );
+
+  router.delete(
+    "/projects/:id",
+    Auth,
+    projectController.delete.bind(projectController)
+  );
+
   return router;
 };

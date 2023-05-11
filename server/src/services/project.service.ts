@@ -14,6 +14,14 @@ class ProjectService implements ProjectServiceInterface {
   async getUserProjects(userId: string) {
     return this.projectRepository.getUserProjects(userId);
   }
+
+  async updateProject(id: string, data: ProjectRequest) {
+    return this.projectRepository.updateProject(id, data);
+  }
+
+  async deleteProject(id: string) {
+    return this.projectRepository.deleteProject(id);
+  }
 }
 
 export default ProjectService;

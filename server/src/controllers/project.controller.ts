@@ -38,6 +38,42 @@ class ProjectController implements ProjectControllerInterface {
 
     return res.status(200).json(projects);
   }
+
+  async update(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const {
+      title,
+      type,
+      slug,
+      thumbnail,
+      linkWebsite,
+      linkRepository,
+      description,
+      userId,
+    } = req.body;
+
+    await this.projectService.updateProject(id, {
+      title,
+      type,
+      slug,
+      thumbnail,
+      linkWebsite,
+      linkRepository,
+      description,
+      userId,
+    });
+
+    return res.status(200).json({ message: "Project updated" });
+  }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    await this.projectService.deleteProject(id);
+
+    return res.status(200).json({ message: "Project deleted" });
+  }
 }
 
 export default ProjectController;

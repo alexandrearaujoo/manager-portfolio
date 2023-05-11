@@ -1,3 +1,4 @@
+import { Projects } from "@prisma/client";
 import {
   ProjectRepositoryInterface,
   ProjectRequest,
@@ -13,6 +14,14 @@ class ProjectRepository implements ProjectRepositoryInterface {
 
   async getUserProjects(userId: string) {
     return this.projectModel.getUserProjects(userId);
+  }
+
+  async updateProject(id: string, data: ProjectRequest) {
+    return this.projectModel.updateProject(id, data);
+  }
+
+  async deleteProject(id: string): Promise<Projects> {
+    return this.projectModel.deleteProject(id);
   }
 }
 

@@ -16,6 +16,14 @@ class ProjectModel implements ProjectModelInterface {
   async getProjectById(id: string) {
     return await prisma.projects.findUnique({ where: { id } });
   }
+
+  async updateProject(id: string, data: ProjectRequest) {
+    return await prisma.projects.update({ where: { id }, data });
+  }
+
+  async deleteProject(id: string) {
+    return await prisma.projects.delete({ where: { id } });
+  }
 }
 
 export default ProjectModel;
