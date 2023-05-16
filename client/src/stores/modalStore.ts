@@ -1,8 +1,13 @@
-import { ModalStore } from '@/interfaces';
+import { ModalStore, Project } from '@/interfaces';
 import { create } from 'zustand';
 
 export const modalStore = create<ModalStore>((set) => ({
-  isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false })
+  project: null,
+  isOpenCreateModal: false,
+  onOpenCreateModal: () => set({ isOpenCreateModal: true }),
+  onCloseCreateModal: () => set({ isOpenCreateModal: false }),
+  isOpenUpdateModal: false,
+  onOpenUpdateModal: (project: Project) =>
+    set({ isOpenUpdateModal: true, project: project }),
+  onCloseUpdateModal: () => set({ isOpenUpdateModal: false })
 }));

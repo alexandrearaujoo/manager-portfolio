@@ -6,14 +6,15 @@ import { fetchWrapper } from '@/utils/fetchWrapper';
 import { create } from 'zustand';
 
 export const userStore = create<UserStore>((set, get) => ({
+  user: null,
   getSession: async () => await getServerSession(authOptions),
   getCurrentUser: async () => {
-    const session: Session | null = await get().getSession();
+    const { getSession } = get();
 
-    console.log(session);
+    const session = (await getSession()) as Session | null;
 
     if (!session) {
-      return;
+      return null;
     }
 
     const user = await fetchWrapper<User>('users', {
@@ -24,8 +25,10 @@ export const userStore = create<UserStore>((set, get) => ({
     });
 
     if ('message' in user) {
-      return;
+      return null;
     }
+
+    user.token = session.token;
 
     return user;
   }

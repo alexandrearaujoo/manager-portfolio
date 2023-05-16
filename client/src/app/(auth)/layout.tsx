@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <main className="bg-zinc-400">{children}</main>;
+  return <main>{children}</main>;
 }

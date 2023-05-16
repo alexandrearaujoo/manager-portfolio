@@ -47,7 +47,7 @@ const RegisterForm = () => {
           {...register('password')}
           error={errors.password?.message}
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} bgWhite>
           Register
         </Button>
         <Button
@@ -55,6 +55,7 @@ const RegisterForm = () => {
           type="button"
           disabled
           title="Coming soon..."
+          bgWhite
         >
           <FcGoogle size={24} /> Continue with Google
         </Button>
@@ -63,6 +64,7 @@ const RegisterForm = () => {
           type="button"
           disabled
           title="Coming soon..."
+          bgWhite
         >
           <AiFillGithub size={24} /> Continue with GitHub
         </Button>

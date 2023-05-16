@@ -1,3 +1,5 @@
+import { ProjectRequest } from '@/schemas/projectSchema';
+
 export interface User {
   id: string;
   name: string;
@@ -29,18 +31,42 @@ export interface Session {
 }
 
 export interface UserStore {
+  user: User | null;
   getSession: () => Promise<Session | null>;
-  getCurrentUser: () => Promise<User | undefined>;
+  getCurrentUser: () => Promise<User | null>;
 }
 
 export interface ModalStore {
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+  project: Project | null;
+  isOpenCreateModal: boolean;
+  onOpenCreateModal: () => void;
+  onCloseCreateModal: () => void;
+  isOpenUpdateModal: boolean;
+  onOpenUpdateModal: (project: Project) => void;
+  onCloseUpdateModal: () => void;
 }
 
 export interface ProjectStore {
   getUserProjects: () => Promise<Project[] | undefined>;
+  createProject: (
+    data: ProjectRequest
+  ) => Promise<{ message: string; status: number }>;
+  updateProject: (
+    projectId: string,
+    data: ProjectRequest,
+    token?: string
+  ) => Promise<{ message: string; status: number }>;
+}
+
+export interface ProjectUpdatedRequest {
+  id: string;
+  title: string;
+  type: string | null;
+  slug: string | null;
+  thumbnail: string | null;
+  linkWebsite: string;
+  linkRepository: string;
+  description: string | null;
 }
 
 interface InfoProps {

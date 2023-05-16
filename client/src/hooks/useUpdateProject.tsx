@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
@@ -7,19 +6,28 @@ import { modalStore } from '@/stores/modalStore';
 import { projectStore } from '@/stores/projectStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export const useCreateProject = () => {
-  const { onCloseCreateModal } = modalStore.getState();
-  const { createProject } = projectStore.getState();
-  const router = useRouter();
+export const useUpdateProject = () => {
+  const { onCloseUpdateModal, project } = modalStore.getState();
+  const { updateProject } = projectStore.getState();
 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    reset,
     formState: { errors, isSubmitting }
-  } = useForm<ProjectRequest>({ resolver: zodResolver(projectSchema) });
+  } = useForm<ProjectRequest>({
+    resolver: zodResolver(projectSchema),
+    defaultValues: {
+      description: project?.description,
+      linkRepository: project?.linkRepository,
+      linkWebsite: project?.linkWebsite,
+      slug: project?.slug,
+      thumbnail: project?.thumbnail,
+      title: project?.title,
+      type: project?.type
+    }
+  });
 
   const thumbnail = watch('thumbnail');
 
@@ -32,16 +40,15 @@ export const useCreateProject = () => {
   };
 
   const onSubmit = async (data: ProjectRequest) => {
-    const project = await createProject(data);
+    const projectUpdated = await updateProject(project?.id as string, data);
 
-    if (project.status !== 201) {
-      toast.error(project.message);
+    if (projectUpdated.status !== 200) {
+      toast.error(projectUpdated.message);
       return;
     }
-    toast.success(project.message);
-    onCloseCreateModal();
-    reset();
-    router.refresh();
+
+    toast.success(projectUpdated.message);
+    onCloseUpdateModal();
   };
 
   return {

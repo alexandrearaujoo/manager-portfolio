@@ -66,8 +66,12 @@ module.exports = {
           }
         }
       },
+      backgroundImage: {
+        'button-gradient': 'linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%)',
+        'bg-global': 'linear-gradient(90deg, rgba(255,255,255,1) 31%, rgba(82,82,91,1) 75%)'
+      },
       gridTemplateColumns: {
-        'auto-fit': 'repeat(auto-fit, minmax(12rem, 1fr))'
+        'auto-fit': 'repeat(auto-fit, minmax(20rem, 1fr))'
       }
     }
   },

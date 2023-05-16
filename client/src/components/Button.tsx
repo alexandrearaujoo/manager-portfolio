@@ -6,15 +6,15 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   onClick?: () => void;
-  color?: string;
   path?: string;
+  bgWhite?: boolean;
 }
 
 const Button = ({
   children,
   path,
   onClick,
-  color = 'black',
+  bgWhite = false,
   ...rest
 }: ButtonProps) => {
   const router = useRouter();
@@ -29,7 +29,13 @@ const Button = ({
     <button
       {...rest}
       onClick={path ? handleClick : onClick}
-      className={`text-lg flex items-center justify-center gap-4 text-${color} font-inherit font-bold relative border-none bg-none ease-expend duration-[400ms] transition-color focus:after:w-full focus:after:left-[0%] hover:after:w-full hover:after:left-[0%] after:content-[''] after:pointer-events-none after:-bottom-[2px] after:left-1/2 after:absolute after:w-[0%] after:h-[2px] after:bg-${color} after:ease-expend after:duration-[400ms] after:transition-expend disabled:cursor-not-allowed`}
+      className={`w-[15em] flex items-center justify-center gap-2 relative h-[3.5rem] border-[3px] border-rigde border-blue-500 bg-transparent ${
+        bgWhite ? 'text-zinc-600' : 'text-white'
+      } transition-all duration-200 rounded-[0.3em] text-base font-bold after:content-[''] after:absolute after:-top-[10px] after:left-[3%] after:w-[95%] after:h-[40%] ${
+        bgWhite ? 'after:bg-white' : 'after:bg-zinc-800'
+      } after:transition-all after:duration-300 after:origin-center before:content-[''] before:origin-center before:absolute before:top-[80%] before:left-[3%] before:w-[95%] before:h-[40%] ${
+        bgWhite ? 'before:bg-white' : 'before:bg-zinc-800'
+      } before:duration-300 hover:before:scale-0 hover:after:scale-0 hover:shadow-lg`}
     >
       {children}
     </button>

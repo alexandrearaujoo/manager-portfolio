@@ -52,6 +52,10 @@ export const authOptions: AuthOptions = {
     error: '/login'
   },
   callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+
     async session({ session, token }) {
       return { ...session, token: token.token as string };
     }

@@ -6,11 +6,11 @@ import Button from '../Button';
 import ImageUpload from '../ImageUpload';
 import Input from '../Input';
 
-import { useCreateProject } from '@/hooks/useCreateProject';
+import { useUpdateProject } from '@/hooks/useUpdateProject';
 import { modalStore } from '@/stores/modalStore';
 import { Dialog, Transition } from '@headlessui/react';
 
-const CreateProjectModal = () => {
+const UpdateProjectModal = () => {
   const {
     register,
     handleSubmit,
@@ -19,13 +19,12 @@ const CreateProjectModal = () => {
     isSubmitting,
     thumbnail,
     errors
-  } = useCreateProject();
-
-  const { isOpenCreateModal, onCloseCreateModal } = modalStore.getState();
+  } = useUpdateProject();
+  const { isOpenUpdateModal, onCloseUpdateModal } = modalStore.getState();
 
   return (
-    <Transition appear show={isOpenCreateModal} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={onCloseCreateModal}>
+    <Transition appear show={isOpenUpdateModal} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onCloseUpdateModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -54,7 +53,7 @@ const CreateProjectModal = () => {
                   as="h3"
                   className="text-lg font-bold leading-6 text-gray-900"
                 >
-                  Create Project
+                  Update Project
                 </Dialog.Title>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
@@ -103,7 +102,7 @@ const CreateProjectModal = () => {
                   </div>
                   <div className="mt-4">
                     <Button type="submit" disabled={isSubmitting}>
-                      Create
+                      Update
                     </Button>
                   </div>
                 </form>
@@ -116,4 +115,4 @@ const CreateProjectModal = () => {
   );
 };
 
-export default CreateProjectModal;
+export default UpdateProjectModal;

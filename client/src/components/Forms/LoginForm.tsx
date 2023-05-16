@@ -43,7 +43,7 @@ const LoginForm = () => {
           {...register('password')}
           error={errors.password?.message}
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} bgWhite>
           Login
         </Button>
         <p className="text-black text-center font-semibold">
@@ -60,6 +60,7 @@ const LoginForm = () => {
           type="button"
           disabled
           title="Coming soon..."
+          bgWhite
         >
           <FcGoogle size={24} /> Login with Google
         </Button>
@@ -68,6 +69,7 @@ const LoginForm = () => {
           type="button"
           disabled
           title="Coming soon..."
+          bgWhite
         >
           <AiFillGithub size={24} /> Login with GitHub
         </Button>
