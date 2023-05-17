@@ -12,7 +12,7 @@ interface CardProps {
 }
 
 const Card = ({ project }: CardProps) => {
-  const onOpenUpdateModal = modalStore.getState().onOpenUpdateModal;
+  const { onOpenUpdateModal } = modalStore();
 
   return (
     <>

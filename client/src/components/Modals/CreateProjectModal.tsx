@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import Button from '../Button';
 import ImageUpload from '../ImageUpload';
@@ -52,9 +53,14 @@ const CreateProjectModal = () => {
               <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-bold leading-6 text-gray-900"
+                  className="text-lg font-bold leading-6 text-gray-900 flex items-center justify-between"
                 >
                   Create Project
+                  <AiOutlineClose
+                    size={30}
+                    onClick={onCloseCreateModal}
+                    className="p-1 cursor-pointer font-bold transition-colors duration-200 hover:text-gray-600"
+                  />
                 </Dialog.Title>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
@@ -102,7 +108,7 @@ const CreateProjectModal = () => {
                     </label>
                   </div>
                   <div className="mt-4">
-                    <Button type="submit" disabled={isSubmitting}>
+                    <Button type="submit" disabled={isSubmitting} bgWhite>
                       Create
                     </Button>
                   </div>
