@@ -17,7 +17,7 @@ const ProjectsList = ({ projects }: { projects?: Project[] }) => {
 
   return (
     <>
-      <ul>
+      <ul className="grid grid-cols-auto-fit gap-4">
         {projects?.map((project) => (
           <Card key={project.id} project={project} />
         ))}
