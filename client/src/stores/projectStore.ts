@@ -1,18 +1,14 @@
-import { userStore } from './userStore';
-
 import { Project, ProjectStore } from '@/interfaces';
 import { ProjectRequest } from '@/schemas/projectSchema';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { create } from 'zustand';
 
 export const projectStore = create<ProjectStore>(() => ({
-  getUserProjects: async () => {
-    const user = userStore.getState().user;
-
+  getUserProjects: async (token: string) => {
     const projects = await fetchWrapper<Project[]>('projects', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${user?.token}`
+        Authorization: `Bearer ${token}`
       },
       cache: 'no-cache'
     });
@@ -23,16 +19,14 @@ export const projectStore = create<ProjectStore>(() => ({
 
     return projects;
   },
-  createProject: async (data: ProjectRequest) => {
-    const user = userStore.getState().user;
-
+  createProject: async (data: ProjectRequest, token: string) => {
     const projectCreated = await fetchWrapper<{
       message: string;
       status: number;
     }>('projects', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${user?.token}`
+        Authorization: `Bearer ${token}`
       },
       method: 'POST',
       body: JSON.stringify({ ...data }),
@@ -41,16 +35,18 @@ export const projectStore = create<ProjectStore>(() => ({
 
     return projectCreated;
   },
-  updateProject: async (projectId: string, data: ProjectRequest) => {
-    const user = userStore.getState().user;
-
+  updateProject: async (
+    projectId: string,
+    data: ProjectRequest,
+    token: string
+  ) => {
     const projectUpdated = await fetchWrapper<{
       message: string;
       status: number;
     }>(`projects/${projectId}`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${user?.token}`
+        Authorization: `Bearer ${token}`
       },
       method: 'PATCH',
       body: JSON.stringify({ ...data }),

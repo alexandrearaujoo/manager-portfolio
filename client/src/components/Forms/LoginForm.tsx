@@ -9,7 +9,7 @@ import Lottie from 'react-lottie';
 import Button from '../Button';
 import Input from '../Input';
 
-import { useLoginForm } from '@/hooks/useLoginForm';
+import { useLoginForm } from '@/components/hooks/useLoginForm';
 import LoginAnimation from '@/lotties/121421-login.json';
 
 const defaultOptions = {
@@ -50,7 +50,7 @@ const LoginForm = () => {
           Don&apos;t have an account ?{' '}
           <Link
             href="/signup"
-            className="text-blue-700 underline duration-[0.5s] hover:text-blue-500"
+            className="bg-clip-text text-transparent bg-button-gradient transition-colors duration-200 hover:opacity-80"
           >
             Sign Up
           </Link>

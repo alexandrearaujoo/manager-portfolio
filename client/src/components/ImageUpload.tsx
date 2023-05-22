@@ -30,12 +30,14 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
         return (
           <div
             onClick={() => open?.()}
-            className="relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 border-blue-500 rounded-md flex flex-col justify-center items-center gap-4 text-neutral-600"
+            className="relative cursor-pointer hover:opacity-70 transition bg-button-gradient p-[0.15rem] rounded-xl flex justify-center items-center gap-4 text-neutral-600"
           >
-            <TbPhotoPlus size={50} className="text-blue-500" />
-            <p className="font-semibold text-lg text-blue-500">
-              Click to upload
-            </p>
+            <div className="bg-zinc-800 w-full h-full rounded-xl flex flex-col justify-center items-center gap-2 p-8">
+              <TbPhotoPlus size={50} className="text-white" />
+              <p className="font-semibold text-lg text-white">
+                Click to upload
+              </p>
+            </div>
             {value && (
               <div className="absolute inset-0 w-full h-full">
                 <Image

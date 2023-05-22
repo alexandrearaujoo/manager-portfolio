@@ -15,7 +15,7 @@ export default async function DashboardLayout({
     <>
       <InitializerStore user={user} />
       <Header />
-      <main className="px-1 md:px-5">{children}</main>
+      <main className="px-5 sm:px-16">{children}</main>
     </>
   );
 }

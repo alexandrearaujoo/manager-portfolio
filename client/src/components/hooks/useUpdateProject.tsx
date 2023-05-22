@@ -1,14 +1,17 @@
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
+import { Project } from '@/interfaces';
 import { ProjectRequest, projectSchema } from '@/schemas/projectSchema';
-import { modalStore } from '@/stores/modalStore';
 import { projectStore } from '@/stores/projectStore';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Cookies from 'js-cookie';
 
-export const useUpdateProject = () => {
-  const { onCloseUpdateModal, project } = modalStore.getState();
+export const useUpdateProject = (project: Project) => {
+  const token = Cookies.get('userToken');
   const { updateProject } = projectStore.getState();
+  const router = useRouter();
 
   const {
     register,
@@ -31,7 +34,7 @@ export const useUpdateProject = () => {
 
   const thumbnail = watch('thumbnail');
 
-  const setCustomValue = (id: any, value: any) => {
+  const setCustomValue = (id: 'thumbnail', value: string) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -40,7 +43,11 @@ export const useUpdateProject = () => {
   };
 
   const onSubmit = async (data: ProjectRequest) => {
-    const projectUpdated = await updateProject(project?.id as string, data);
+    const projectUpdated = await updateProject(
+      project?.id as string,
+      data,
+      token as string
+    );
 
     if (projectUpdated.status !== 200) {
       toast.error(projectUpdated.message);
@@ -48,7 +55,7 @@ export const useUpdateProject = () => {
     }
 
     toast.success(projectUpdated.message);
-    onCloseUpdateModal();
+    router.push('/dashboard');
   };
 
   return {

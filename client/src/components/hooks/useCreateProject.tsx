@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 import { ProjectRequest, projectSchema } from '@/schemas/projectSchema';
-import { modalStore } from '@/stores/modalStore';
 import { projectStore } from '@/stores/projectStore';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Cookies from 'js-cookie';
 
 export const useCreateProject = () => {
-  const { onCloseCreateModal } = modalStore.getState();
+  const token = Cookies.get('userToken');
   const { createProject } = projectStore.getState();
   const router = useRouter();
 
@@ -23,7 +23,7 @@ export const useCreateProject = () => {
 
   const thumbnail = watch('thumbnail');
 
-  const setCustomValue = (id: any, value: any) => {
+  const setCustomValue = (id: 'thumbnail', value: string) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -32,16 +32,15 @@ export const useCreateProject = () => {
   };
 
   const onSubmit = async (data: ProjectRequest) => {
-    const project = await createProject(data);
+    const project = await createProject(data, token as string);
 
     if (project.status !== 201) {
       toast.error(project.message);
       return;
     }
     toast.success(project.message);
-    onCloseCreateModal();
     reset();
-    router.refresh();
+    router.push('/dashboard');
   };
 
   return {

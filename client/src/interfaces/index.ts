@@ -47,14 +47,15 @@ export interface ModalStore {
 }
 
 export interface ProjectStore {
-  getUserProjects: () => Promise<Project[] | undefined>;
+  getUserProjects: (token: string) => Promise<Project[] | undefined>;
   createProject: (
-    data: ProjectRequest
+    data: ProjectRequest,
+    token: string
   ) => Promise<{ message: string; status: number }>;
   updateProject: (
     projectId: string,
     data: ProjectRequest,
-    token?: string
+    token: string
   ) => Promise<{ message: string; status: number }>;
 }
 

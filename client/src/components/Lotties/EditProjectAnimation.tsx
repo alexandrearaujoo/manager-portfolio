@@ -2,27 +2,27 @@
 
 import Lottie from 'react-lottie';
 
-import ManagerAnimated from '@/lotties/manager.json';
+import EditProjectAnimated from '@/lotties/edit-project.json';
 
 const defaultOptions = {
   loop: true,
   autoplay: true,
-  animationData: ManagerAnimated,
+  animationData: EditProjectAnimated,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice'
   }
 };
 
-const ManagerAnimation = () => {
+const EditProjectAnimation = () => {
   return (
     <Lottie
       options={defaultOptions}
       height={300}
       width={300}
-      isClickToPauseDisabled={false}
+      isClickToPauseDisabled
       style={{ cursor: 'default' }}
     />
   );
 };
 
-export default ManagerAnimation;
+export default EditProjectAnimation;

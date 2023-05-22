@@ -8,6 +8,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 
 import { userStore } from '@/stores/userStore';
 import { Menu, Transition } from '@headlessui/react';
+import Cookies from 'js-cookie';
 
 const Avatar = () => {
   const { user } = userStore.getState();
@@ -86,7 +87,10 @@ const Avatar = () => {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut();
+                      Cookies.remove('userToken');
+                    }}
                     className={`${
                       active ? 'bg-button-gradient text-white' : 'text-gray-900'
                     } group transition-all duration-200 flex w-full items-center rounded-md px-2 py-2 text-sm`}

@@ -9,18 +9,20 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ children, bgWhite = false, ...rest }: ButtonProps) => {
   return (
-    <button
-      {...rest}
-      className={`w-[15em] flex items-center justify-center gap-2 relative h-[3.5rem] border-[3px] border-rigde border-blue-500 bg-transparent ${
-        bgWhite ? 'text-zinc-600' : 'text-white'
-      } transition-all duration-200 rounded-[0.3em] text-base font-bold after:content-[''] after:absolute after:-top-[10px] after:left-[3%] after:w-[95%] after:h-[40%] ${
-        bgWhite ? 'after:bg-white' : 'after:bg-zinc-800'
-      } after:transition-all after:duration-300 after:origin-center before:content-[''] before:origin-center before:absolute before:top-[80%] before:left-[3%] before:w-[95%] before:h-[40%] ${
-        bgWhite ? 'before:bg-white' : 'before:bg-zinc-800'
-      } before:duration-300 hover:before:scale-0 hover:after:scale-0 hover:shadow-lg`}
-    >
-      {children}
-    </button>
+    <div className="bg-button-gradient p-[0.15rem] rounded-xl w-[15.3em]">
+      <button
+        {...rest}
+        className={`w-[15em] flex items-center justify-center gap-2 relative h-[3.5rem] ${
+          bgWhite ? 'text-zinc-600 bg-white' : 'text-white bg-zinc-800'
+        } transition-all duration-200 rounded-xl text-base font-bold after:content-[''] after:absolute after:-top-[10px] after:left-[3%] after:w-[95%] after:h-[40%] ${
+          bgWhite ? 'after:bg-white' : 'after:bg-zinc-800'
+        } after:transition-all after:duration-300 after:origin-center before:content-[''] before:origin-center before:absolute before:top-[80%] before:left-[3%] before:w-[95%] before:h-[40%] ${
+          bgWhite ? 'before:bg-white' : 'before:bg-zinc-800'
+        } before:duration-300 hover:before:scale-0 hover:after:scale-0 hover:shadow-lg`}
+      >
+        {children}
+      </button>
+    </div>
   );
 };
 

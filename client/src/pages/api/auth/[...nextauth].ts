@@ -1,5 +1,4 @@
-import { AuthOptions } from 'next-auth';
-import NextAuth from 'next-auth/next';
+import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -64,5 +63,4 @@ export const authOptions: AuthOptions = {
 
   secret: process.env.NEXTAUTH_SECRET
 };
-
 export default NextAuth(authOptions);
