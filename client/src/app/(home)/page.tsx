@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import ManagerAnimation from '@/components/ManagerAnimation';
+import ManagerAnimation from '@/components/Lotties/ManagerAnimation';
 
 export default function Home() {
   return (
