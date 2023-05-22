@@ -4,7 +4,7 @@ import Button from '../Button';
 import ImageUpload from '../ImageUpload';
 import Input from '../Input';
 
-import { useUpdateProject } from '@/components/hooks/useUpdateProject';
+import { useUpdateProject } from '@/hooks/useUpdateProject';
 import { Project } from '@/interfaces';
 
 const UpdateProjectForm = ({ project }: { project: Project }) => {

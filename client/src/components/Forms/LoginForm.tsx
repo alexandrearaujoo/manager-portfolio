@@ -9,7 +9,7 @@ import Lottie from 'react-lottie';
 import Button from '../Button';
 import Input from '../Input';
 
-import { useLoginForm } from '@/components/hooks/useLoginForm';
+import { useLoginForm } from '@/hooks/useLoginForm';
 import LoginAnimation from '@/lotties/121421-login.json';
 
 const defaultOptions = {

@@ -9,7 +9,7 @@ import Lottie from 'react-lottie';
 import Button from '../Button';
 import Input from '../Input';
 
-import { useRegisterForm } from '@/components/hooks/useRegisterForm';
+import { useRegisterForm } from '@/hooks/useRegisterForm';
 import SignUpAnimation from '@/lotties/38435-register.json';
 
 const defaultOptions = {

@@ -4,7 +4,7 @@ import Button from '../Button';
 import ImageUpload from '../ImageUpload';
 import Input from '../Input';
 
-import { useCreateProject } from '@/components/hooks/useCreateProject';
+import { useCreateProject } from '@/hooks/useCreateProject';
 
 const CreateProjectForm = () => {
   const {
