@@ -3,7 +3,7 @@ import {
   ProjectModelInterface,
 } from "../interfaces/projects.interface";
 import { prisma } from "../../prisma/prismaClient";
-import AppError from "@/errors";
+import AppError from "../errors";
 
 class ProjectModel implements ProjectModelInterface {
   async createProject(data: ProjectRequest) {
