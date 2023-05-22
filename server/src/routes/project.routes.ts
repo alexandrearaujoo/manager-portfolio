@@ -20,6 +20,12 @@ export const projectRouter = () => {
     projectController.index.bind(projectController)
   );
 
+  router.get(
+    "/projects/:id",
+    Auth,
+    projectController.show.bind(projectController)
+  );
+
   router.patch(
     "/projects/:id",
     Auth,

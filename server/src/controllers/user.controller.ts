@@ -21,9 +21,14 @@ class UserController implements UserControllerInterface {
       password,
     });
 
-    return res.status(200).json(user);
+    const oneMonth = 30 * 24 * 60 * 60 * 1000;
+    
+    return res
+      .cookie("tokenPortfolio", user.token, { path: "/", httpOnly: false, maxAge: oneMonth })
+      .status(200)
+      .json(user);
   }
-  
+
   async show(req: Request, res: Response) {
     const { id } = req.user;
 

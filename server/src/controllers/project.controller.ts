@@ -32,6 +32,15 @@ class ProjectController implements ProjectControllerInterface {
     return res.status(201).json({ message: "Project created" });
   }
 
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+    const { id: userId } = req.user;
+
+    const project = await this.projectService.getProjectById(id);
+
+    return res.json(project)
+  }
+
   async index(req: Request, res: Response) {
     const { id: userId } = req.user;
     const projects = await this.projectService.getUserProjects(userId);

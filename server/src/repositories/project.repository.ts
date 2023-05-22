@@ -16,6 +16,10 @@ class ProjectRepository implements ProjectRepositoryInterface {
     return this.projectModel.getUserProjects(userId);
   }
 
+  async getProjectById(id: string) {
+    return this.projectModel.getProjectById(id);
+  }
+
   async updateProject(id: string, data: ProjectRequest) {
     return this.projectModel.updateProject(id, data);
   }

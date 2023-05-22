@@ -3,6 +3,7 @@ import {
   ProjectModelInterface,
 } from "../interfaces/projects.interface";
 import { prisma } from "../../prisma/prismaClient";
+import AppError from "@/errors";
 
 class ProjectModel implements ProjectModelInterface {
   async createProject(data: ProjectRequest) {
@@ -14,15 +15,29 @@ class ProjectModel implements ProjectModelInterface {
   }
 
   async getProjectById(id: string) {
-    return await prisma.projects.findUnique({ where: { id } });
+    if (id.length !== 24) throw new AppError(404, "Project not found");
+
+    const project = await prisma.projects.findUnique({ where: { id } });
+
+    if (!project) throw new AppError(404, "Project not found");
+
+    return project;
   }
 
   async updateProject(id: string, data: ProjectRequest) {
-    return await prisma.projects.update({ where: { id }, data });
+    const project = await prisma.projects.findUnique({ where: { id } });
+
+    if (!project) throw new AppError(404, "Project not found");
+
+    return await prisma.projects.update({ where: { id }, data: { ...data } });
   }
 
   async deleteProject(id: string) {
-    return await prisma.projects.delete({ where: { id } });
+    const project = await prisma.projects.findUnique({ where: { id } });
+
+    if (!project) throw new AppError(404, "Project not found");
+
+    return await prisma.projects.delete({ where: { id: project.id } });
   }
 }
 
