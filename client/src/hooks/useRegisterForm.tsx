@@ -1,4 +1,3 @@
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -33,20 +32,23 @@ export const useRegisterForm = () => {
       return;
     }
 
-    const res = await signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false
+    const res = await fetch('/api/login', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({ email: data.email, password: data.password })
     });
 
-    if (res?.ok) {
-      reset();
-      toast.success('Login successful');
-      router.push('/dashboard');
+    const login = await res.json();
+
+    if ('message' in login) {
+      toast.error(login.message);
+      return;
     }
-    if (res?.error) {
-      toast.error(res.error);
-    }
+    reset();
+    toast.success('Login successful');
+    router.push('/dashboard');
   };
 
   return { register, handleSubmit, onSubmit, errors, isSubmitting };
