@@ -10,8 +10,6 @@ export const metadata = {
   title: 'Dashboard'
 };
 
-// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export default async function Dashboard() {
   const token = cookies().get('userToken')?.value;
 
@@ -23,7 +21,7 @@ export default async function Dashboard() {
     <>
       <section className="w-full">
         <Link
-          href="/dashboard/create"
+          href="/create"
           className="group flex items-center justify-start w-12 h-12 border-none mb-5 rounded-md relative overflow-hidden transition-all duration-200 bg-button-gradient hover:w-36 hover:transition-all hover:duration-200"
         >
           <div className="w-full transition-all duration-200 flex items-center justify-center text-white group-hover:w-[30%] group-hover:transition-all group-hover:duration-200 group-hover:pl-1">

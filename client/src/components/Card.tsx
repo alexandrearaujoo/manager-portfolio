@@ -11,15 +11,17 @@ interface CardProps {
 const Card = ({ project }: CardProps) => {
   return (
     <>
-      <li className="relative flex items-center justify-center w-full shadow-lg p-8 overflow-hidden rounded-xl transition-all duration-200 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[5px] before:bg-button-gradient before:z-[-1] before:transition-all before:duration-200 hover:before:h-full hover:shadow-none">
+      <li className="relative flex items-center justify-center w-full min-w-min shadow-lg p-8 overflow-hidden rounded-xl transition-all duration-200 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[5px] before:bg-button-gradient before:z-[-1] before:transition-all before:duration-200 hover:before:h-full hover:shadow-none">
         <div className="flex flex-col items-start w-full gap-5 text-gray-200 transition-all duration-200">
-          <h1 className="font-bold text-3xl">{project.title}</h1>
+          <h1 className="font-bold text-3xl break-words w-full">
+            {project.title}
+          </h1>
           <p className="leading-[1.5]">
             {project.description || "This project doesn't have a description"}
           </p>
           <div className="flex items-center gap-5">
             <Link
-              href={`/dashboard/edit/${project.id}`}
+              href={`/edit/${project.id}`}
               className="group flex items-center justify-start w-12 h-12 border-none rounded-md relative overflow-hidden transition-all duration-200 bg-button-gradient hover:w-32 hover:transition-all hover:duration-200"
             >
               <div className="w-full transition-all duration-200 flex items-center justify-center group-hover:w-[30%] group-hover:transition-all group-hover:duration-200 group-hover:pl-5">

@@ -7,6 +7,10 @@ import EditProjectAnimation from '@/components/Lotties/EditProjectAnimation';
 import { Project } from '@/interfaces';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 
+export const metadata = {
+  title: 'Update Project'
+};
+
 export default async function Edit({ params }: { params: { id: string } }) {
   const token = cookies().get('userToken')?.value;
 

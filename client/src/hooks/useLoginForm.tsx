@@ -1,4 +1,3 @@
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -12,24 +11,27 @@ export const useLoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-    reset
+    formState: { errors, isSubmitting }
   } = useForm<LoginRequest>({ resolver: zodResolver(loginSchema) });
 
   const onSubmit = async (data: LoginRequest) => {
-    const res = await signIn('credentials', {
-      ...data,
-      redirect: false
+    const res = await fetch('/api/login', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
     });
 
-    if (res?.ok) {
-      reset();
-      toast.success('Login successful');
-      router.push('/dashboard');
+    const user = await res.json();
+
+    if ('message' in user) {
+      toast.error(user.message);
+      return;
     }
-    if (res?.error) {
-      toast.error(res.error);
-    }
+
+    toast.success('Login successful');
+    router.push('/dashboard');
   };
 
   return { register, handleSubmit, onSubmit, errors, isSubmitting };

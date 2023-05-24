@@ -1,32 +1,25 @@
-import { withAuth } from 'next-auth/middleware';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default withAuth(
-  async function middleware(req) {
-    const { pathname } = req.nextUrl;
-    const isAuth = req.nextauth.token;
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const isAuth = req.cookies.get('userToken')?.value;
 
-    const sensitiveRoutes = pathname.startsWith('/dashboard');
-    const authPaths = ['/login', '/signup'];
+  const sensitiveRoutes = ['/dashboard', '/create', '/token'];
+  const editRoute = pathname.startsWith('/edit');
+  const authPaths = ['/', '/login', '/signup'];
 
-    if (authPaths.includes(pathname) && isAuth) {
-      return NextResponse.redirect(new URL('/dashboard', req.url));
-    }
-    if (sensitiveRoutes && !isAuth) {
-      return NextResponse.redirect(new URL('/login', req.url));
-    }
-
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      async authorized() {
-        return true;
-      }
-    }
+  if (authPaths.includes(pathname) && isAuth) {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
-);
+  if (
+    (sensitiveRoutes.includes(pathname) && !isAuth) ||
+    (editRoute && !isAuth)
+  ) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
 
+  return NextResponse.next();
+}
 export const config = {
-  matchter: ['/dashboard/:path*']
+  matchter: ['/dashboard', '/create', '/token', '/edit/:path*']
 };

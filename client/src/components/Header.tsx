@@ -25,9 +25,9 @@ const Header = () => {
           Dashboard
         </Link>
         <Link
-          href="/dashboard/token"
+          href="/token"
           className={`hidden sm:block whitespace-nowrap w-20 text-white font-bold text-base transition-all duration-200 border-b-2 ${
-            pathname === '/dashboard/token'
+            pathname === '/token'
               ? 'border-white'
               : 'border-transparent hover:border-white'
           }`}

@@ -39,11 +39,12 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
               </p>
             </div>
             {value && (
-              <div className="absolute inset-0 w-full h-full">
+              <div className="absolute inset-0 rounded-xl p-1 w-full h-full">
                 <Image
                   alt="Upload"
                   fill
                   style={{ objectFit: 'cover' }}
+                  className="p-[0.15rem] rounded-xl"
                   src={value}
                 />
               </div>

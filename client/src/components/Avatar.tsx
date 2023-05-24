@@ -1,17 +1,18 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 import { AiOutlineRight } from 'react-icons/ai';
 
-import { userStore } from '@/stores/userStore';
+import { getUser } from '@/utils/getUser';
 import { Menu, Transition } from '@headlessui/react';
 import Cookies from 'js-cookie';
 
 const Avatar = () => {
-  const { user } = userStore.getState();
+  const user = getUser();
+  const router = useRouter();
 
   return (
     <div className="w-full max-w-[180px] text-right">
@@ -19,8 +20,8 @@ const Avatar = () => {
         <div>
           <Menu.Button className="flex w-full items-center gap-3 justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <Image
-              src={user?.image || '/assets/placeholder.png'}
-              alt={user?.name || 'placeholder'}
+              src="/assets/placeholder.png"
+              alt="placeholder"
               width={40}
               height={40}
               className="rounded-full"
@@ -60,7 +61,7 @@ const Avatar = () => {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="/dashboard/token"
+                    href="/token"
                     className={`${
                       active ? 'bg-button-gradient text-white' : 'text-gray-900'
                     } group transition-all duration-200 flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -88,7 +89,7 @@ const Avatar = () => {
                 {({ active }) => (
                   <button
                     onClick={() => {
-                      signOut();
+                      router.push('/login');
                       Cookies.remove('userToken');
                     }}
                     className={`${

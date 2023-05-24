@@ -3,13 +3,25 @@
 @tailwind utilities;
 
 body {
-    @apply bg-zinc-800 overflow-x-hidden
+    @apply bg-zinc-800 overflow-x-hidden h-screen
 }
 
 #__next {
-    @apply h-full
+    @apply h-screen
 }
 
 html {
-    @apply h-full
+    @apply h-screen
+}
+
+::-webkit-scrollbar {
+  @apply w-2
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-zinc-800
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-xl bg-button-gradient
 }

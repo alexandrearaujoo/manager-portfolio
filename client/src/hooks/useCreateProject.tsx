@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 
 import { ProjectRequest, projectSchema } from '@/schemas/projectSchema';
 import { projectStore } from '@/stores/projectStore';
+import { delay } from '@/utils/delay';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Cookies from 'js-cookie';
 
@@ -38,6 +39,7 @@ export const useCreateProject = () => {
       toast.error(project.message);
       return;
     }
+    await delay(2000);
     toast.success(project.message);
     reset();
     router.push('/dashboard');

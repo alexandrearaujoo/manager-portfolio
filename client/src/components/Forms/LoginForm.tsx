@@ -1,9 +1,6 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { AiFillGithub } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
 import Lottie from 'react-lottie';
 
 import Button from '../Button';
@@ -55,24 +52,6 @@ const LoginForm = () => {
             Sign Up
           </Link>
         </p>
-        <Button
-          onClick={() => signIn('google')}
-          type="button"
-          disabled
-          title="Coming soon..."
-          bgWhite
-        >
-          <FcGoogle size={24} /> Login with Google
-        </Button>
-        <Button
-          onClick={() => signIn('github')}
-          type="button"
-          disabled
-          title="Coming soon..."
-          bgWhite
-        >
-          <AiFillGithub size={24} /> Login with GitHub
-        </Button>
       </form>
       <div className="hidden md:block">
         <Lottie

@@ -1,6 +1,10 @@
 import CreateProjectForm from '@/components/Forms/CreateProjectForm';
 import CreateProjectAnimation from '@/components/Lotties/CreateProjectAnimation';
 
+export const metadata = {
+  title: 'Create Project'
+};
+
 export default function Create() {
   return (
     <main className="px-1 md:px-10 flex gap-4 md:flex-row items-center justify-center">
