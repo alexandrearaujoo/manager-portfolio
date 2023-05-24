@@ -1,6 +1,7 @@
 import "express-async-errors";
 import express, { Express } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { appRoutes } from "./routes";
 import errorHandler from "./middlewares/errorHandler";
@@ -17,6 +18,7 @@ class App {
 
   middlewares() {
     this.server.use(cors());
+    this.server.use(cookieParser())
     this.server.use(express.json());
   }
 

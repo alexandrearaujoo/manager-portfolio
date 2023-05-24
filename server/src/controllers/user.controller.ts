@@ -1,6 +1,7 @@
+import { date } from "zod";
 import { UserControllerInterface } from "../interfaces/user.interface";
 import UserService from "../services/user.service";
-import { Request, Response } from "express";
+import { Request, Response, CookieOptions } from "express";
 
 class UserController implements UserControllerInterface {
   constructor(private userService = new UserService()) {}
@@ -22,11 +23,13 @@ class UserController implements UserControllerInterface {
     });
 
     const oneMonth = 30 * 24 * 60 * 60 * 1000;
-    
-    return res
-      .cookie("tokenPortfolio", user.token, { path: "/", httpOnly: false, maxAge: oneMonth })
-      .status(200)
-      .json(user);
+
+    return res.cookie('isLoggedin', "true", {
+      secure: true,
+      httpOnly: false,
+      sameSite: 'none',
+      path: '/'
+  }).json(user);
   }
 
   async show(req: Request, res: Response) {

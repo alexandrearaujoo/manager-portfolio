@@ -39,15 +39,27 @@ class UserModel implements ModelInterface {
       throw new AppError(404, "Invalid credentials");
     }
 
+    const userTokenExists = await prisma.token.findUnique({
+      where: { userId: user.id },
+    });
+
+    if (userTokenExists) {
+      return { ...user, token: userTokenExists.token };
+    }
+
     const token = jwt.sign(
-      { email: user.email },
+      { email: user.email, name: user.name },
       process.env.JWT_SECRET as string,
       {
         subject: user.id,
       }
     );
 
-    return { ...user, token };
+    const userToken = await prisma.token.create({
+      data: { token, userId: user.id },
+    });
+
+    return { ...user, token: userToken.token };
   }
   async getUserByEmail(email: string) {
     return await prisma.user.findUnique({ where: { email } });
