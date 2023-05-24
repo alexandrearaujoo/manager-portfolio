@@ -12,8 +12,8 @@ export default function Home() {
           Project manager
         </h1>
         <div className="flex flex-col gap-5 sm:gap-3 sm:flex-row items-center justify-center">
-          <Redirect href="/login" />
-          <Redirect href="/signup" />
+          <Redirect href="/login" label="Login" />
+          <Redirect href="/signup" label="Sign Up" />
         </div>
       </section>
     </main>

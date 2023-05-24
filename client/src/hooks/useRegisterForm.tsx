@@ -32,23 +32,9 @@ export const useRegisterForm = () => {
       return;
     }
 
-    const res = await fetch('/api/login', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ email: data.email, password: data.password })
-    });
-
-    const login = await res.json();
-
-    if ('message' in login) {
-      toast.error(login.message);
-      return;
-    }
+    toast.success('Successfully registered!');
+    router.push('/login');
     reset();
-    toast.success('Login successful');
-    router.push('/dashboard');
   };
 
   return { register, handleSubmit, onSubmit, errors, isSubmitting };
