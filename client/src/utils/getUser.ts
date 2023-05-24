@@ -10,7 +10,9 @@ interface User {
 export const getUser = () => {
   const token = Cookies.get('userToken');
 
-  const user: User = jwtDecode(token as string);
+  if (!token) return { email: '', name: '' };
+
+  const user: User = jwtDecode(token);
 
   return user;
 };
