@@ -10,7 +10,7 @@ import Input from '../Input';
 
 import { useDeleteProject } from '@/hooks/useDeleteProject';
 import { useUpdateProject } from '@/hooks/useUpdateProject';
-import { Project } from '@/interfaces';
+import { modalStore } from '@/stores/modalStore';
 import { Transition, Dialog } from '@headlessui/react';
 
 const DeleteProjectModal = dynamic(() => import('./DeleteProjectModal'), {
@@ -19,13 +19,12 @@ const DeleteProjectModal = dynamic(() => import('./DeleteProjectModal'), {
 
 const UpdateProjectModal = ({
   onOpen,
-  closeModal,
-  project
+  closeModal
 }: {
-  project: Project;
   onOpen: boolean;
   closeModal: () => void;
 }) => {
+  const project = modalStore((state) => state.project);
   const {
     register,
     handleSubmit,
@@ -146,7 +145,7 @@ const UpdateProjectModal = ({
         <DeleteProjectModal
           isOpen={isDeleteModalOpen}
           closeModal={onCloseDeleteModal}
-          projectId={project.id}
+          projectId={project?.id}
         />
       )}
     </>

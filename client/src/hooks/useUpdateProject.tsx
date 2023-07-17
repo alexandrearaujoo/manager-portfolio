@@ -9,7 +9,7 @@ import { projectStore } from '@/stores/projectStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Cookies from 'js-cookie';
 
-export const useUpdateProject = (project: Project) => {
+export const useUpdateProject = (project: Project | null) => {
   const token = Cookies.get('userToken');
   const updateProject = projectStore((state) => state.updateProject);
   const router = useRouter();

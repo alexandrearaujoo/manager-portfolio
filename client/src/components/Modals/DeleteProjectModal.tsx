@@ -15,7 +15,7 @@ const DeleteProjectModal = ({
 }: {
   isOpen: boolean;
   closeModal: () => void;
-  projectId: string;
+  projectId?: string;
 }) => {
   const { deleteProject, isDeleting } = useDeleteProject();
 

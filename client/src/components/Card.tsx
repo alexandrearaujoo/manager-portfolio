@@ -72,7 +72,6 @@ const Card = ({ project }: CardProps) => {
       {isUpdateModalOpen && (
         <UpdateProjectModal
           onOpen={isUpdateModalOpen}
-          project={project}
           closeModal={onCloseUpdateModal}
         />
       )}

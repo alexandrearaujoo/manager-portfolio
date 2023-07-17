@@ -14,7 +14,7 @@ export const useDeleteProject = () => {
   const onDeleteModalOpen = modalStore((state) => state.onDeleteModalOpen);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const deleteProject = async (projectId: string) => {
+  const deleteProject = async (projectId?: string) => {
     setIsDeleting(true);
     const {
       data: { message, status }
