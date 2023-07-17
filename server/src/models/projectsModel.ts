@@ -11,7 +11,7 @@ class ProjectModel implements ProjectModelInterface {
   }
 
   async getUserProjects(userId: string) {
-    return await prisma.projects.findMany({ where: { userId } });
+    return await prisma.projects.findMany({ where: { userId }, orderBy: {createdAt: "desc"} });
   }
 
   async getProjectById(id: string) {

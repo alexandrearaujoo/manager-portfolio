@@ -34,7 +34,6 @@ class ProjectController implements ProjectControllerInterface {
 
   async show(req: Request, res: Response) {
     const { id } = req.params;
-    const { id: userId } = req.user;
 
     const project = await this.projectService.getProjectById(id);
 
