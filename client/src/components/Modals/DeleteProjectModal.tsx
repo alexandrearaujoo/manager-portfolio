@@ -3,7 +3,7 @@
 import { Fragment } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import Button from './Button';
+import Button from '../Button';
 
 import { useDeleteProject } from '@/hooks/useDeleteProject';
 import { Transition, Dialog } from '@headlessui/react';

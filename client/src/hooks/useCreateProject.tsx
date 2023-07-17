@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 import { ProjectRequest, projectSchema } from '@/schemas/projectSchema';
+import { modalStore } from '@/stores/modalStore';
 import { projectStore } from '@/stores/projectStore';
-import { delay } from '@/utils/delay';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 
 export const useCreateProject = () => {
   const token = Cookies.get('userToken');
-  const { createProject } = projectStore.getState();
+  const createProject = projectStore((state) => state.createProject);
   const router = useRouter();
+  const onCloseCreateModal = modalStore((state) => state.onCloseCreateModal);
 
   const {
     register,
@@ -33,16 +35,20 @@ export const useCreateProject = () => {
   };
 
   const onSubmit = async (data: ProjectRequest) => {
-    const project = await createProject(data, token as string);
+    try {
+      const project = await createProject(data, token as string);
 
-    if (project.status !== 201) {
-      toast.error(project.message);
-      return;
+      onCloseCreateModal();
+      router.refresh();
+      toast.success(project.message);
+      reset();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+        return;
+      }
+      toast.error('Something went wrong');
     }
-    await delay(2000);
-    toast.success(project.message);
-    reset();
-    router.push('/dashboard');
   };
 
   return {

@@ -38,12 +38,15 @@ export interface UserStore {
 
 export interface ModalStore {
   project: Project | null;
-  isOpenCreateModal: boolean;
-  onOpenCreateModal: () => void;
+  isCreateModalOpen: boolean;
+  onCreateModalOpen: () => void;
   onCloseCreateModal: () => void;
-  isOpenUpdateModal: boolean;
-  onOpenUpdateModal: (project: Project) => void;
+  isUpdateModalOpen: boolean;
+  onUpdateModalOpen: (project: Project) => void;
   onCloseUpdateModal: () => void;
+  isDeleteModalOpen: boolean;
+  onDeleteModalOpen: () => void;
+  onCloseDeleteModal: () => void;
 }
 
 export interface ProjectStore {

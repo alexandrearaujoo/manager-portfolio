@@ -1,36 +1,34 @@
 import { Project, ProjectStore } from '@/interfaces';
 import { ProjectRequest } from '@/schemas/projectSchema';
-import { fetchWrapper } from '@/utils/fetchWrapper';
+import { api } from '@/services/api';
 import { create } from 'zustand';
 
 export const projectStore = create<ProjectStore>(() => ({
   getUserProjects: async (token: string) => {
-    const projects = await fetchWrapper<Project[]>('projects', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      cache: 'no-cache'
-    });
+    try {
+      const { data } = await api.get<Project[]>('projects', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-    if ('message' in projects) {
-      return [];
+      if ('message' in data) {
+        return [];
+      }
+
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-
-    return projects;
   },
   createProject: async (data: ProjectRequest, token: string) => {
-    const projectCreated = await fetchWrapper<{
+    const { data: projectCreated } = await api.post<{
       message: string;
       status: number;
-    }>('projects', {
+    }>('projects', data, {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-      },
-      method: 'POST',
-      body: JSON.stringify({ ...data }),
-      cache: 'no-cache'
+      }
     });
 
     return projectCreated;
@@ -40,19 +38,12 @@ export const projectStore = create<ProjectStore>(() => ({
     data: ProjectRequest,
     token: string
   ) => {
-    const projectUpdated = await fetchWrapper<{
-      message: string;
-      status: number;
-    }>(`projects/${projectId}`, {
+    const res = await api.patch(`projects/${projectId}`, data, {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-      },
-      method: 'PATCH',
-      body: JSON.stringify({ ...data }),
-      cache: 'no-cache'
+      }
     });
 
-    return projectUpdated;
+    return { message: res.data.message, status: res.status };
   }
 }));

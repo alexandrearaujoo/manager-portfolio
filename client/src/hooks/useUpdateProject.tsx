@@ -4,14 +4,16 @@ import { toast } from 'react-hot-toast';
 
 import { Project } from '@/interfaces';
 import { ProjectRequest, projectSchema } from '@/schemas/projectSchema';
+import { modalStore } from '@/stores/modalStore';
 import { projectStore } from '@/stores/projectStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Cookies from 'js-cookie';
 
 export const useUpdateProject = (project: Project) => {
   const token = Cookies.get('userToken');
-  const { updateProject } = projectStore.getState();
+  const updateProject = projectStore((state) => state.updateProject);
   const router = useRouter();
+  const onCloseUpdateModal = modalStore((state) => state.onCloseUpdateModal);
 
   const {
     register,
@@ -54,8 +56,9 @@ export const useUpdateProject = (project: Project) => {
       return;
     }
 
+    router.refresh();
     toast.success(projectUpdated.message);
-    router.push('/dashboard');
+    onCloseUpdateModal();
   };
 
   return {

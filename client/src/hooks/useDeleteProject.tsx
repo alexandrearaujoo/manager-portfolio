@@ -2,24 +2,26 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import { fetchWrapper } from '@/utils/fetchWrapper';
+import { api } from '@/services/api';
+import { modalStore } from '@/stores/modalStore';
 import Cookies from 'js-cookie';
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const useDeleteProject = () => {
   const router = useRouter();
   const token = Cookies.get('userToken');
-  const [isOpen, setIsOpen] = useState(false);
+  const isDeleteModalOpen = modalStore((state) => state.isDeleteModalOpen);
+  const onCloseDeleteModal = modalStore((state) => state.onCloseDeleteModal);
+  const onDeleteModalOpen = modalStore((state) => state.onDeleteModalOpen);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteProject = async (projectId: string) => {
     setIsDeleting(true);
-    const { message, status } = await fetchWrapper<{
+    const {
+      data: { message, status }
+    } = await api.delete<{
       message: string;
       status: number;
     }>(`projects/${projectId}`, {
-      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -30,11 +32,17 @@ export const useDeleteProject = () => {
       setIsDeleting(false);
       return;
     }
-    await delay(2000);
+
+    router.refresh();
     toast.success(message);
     setIsDeleting(false);
-    setIsOpen(false);
-    router.push('/dashboard');
+    onCloseDeleteModal();
   };
-  return { deleteProject, isDeleting, setIsOpen, isOpen };
+  return {
+    deleteProject,
+    isDeleting,
+    onCloseDeleteModal,
+    onDeleteModalOpen,
+    isDeleteModalOpen
+  };
 };

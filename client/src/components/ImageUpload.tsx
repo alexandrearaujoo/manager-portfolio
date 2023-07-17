@@ -32,9 +32,9 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
             onClick={() => open?.()}
             className="relative cursor-pointer hover:opacity-70 transition bg-button-gradient p-[0.15rem] rounded-xl flex justify-center items-center gap-4 text-neutral-600"
           >
-            <div className="bg-zinc-800 w-full h-full rounded-xl flex flex-col justify-center items-center gap-2 p-8">
-              <TbPhotoPlus size={50} className="text-white" />
-              <p className="font-semibold text-lg text-white">
+            <div className="bg-white w-full h-full rounded-xl flex flex-col justify-center items-center gap-2 p-8">
+              <TbPhotoPlus size={50} className="text-zinc-800" />
+              <p className="font-semibold text-lg text-zinc-800">
                 Click to upload
               </p>
             </div>
